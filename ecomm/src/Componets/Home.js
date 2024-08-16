@@ -1,17 +1,27 @@
-import React, { useEffect } from 'react'
- import { useContext } from 'react';
- import ProductContext from '../Context/Product/ProductContext';
-import { Link } from 'react-router-dom';
+	import React, { useEffect } from 'react'
+ 	import { useContext } from 'react';
+	 import ProductContext from '../Context/Product/ProductContext';
+	import { Link, useNavigate } from 'react-router-dom';
 
-export default function Home() {
+	export default function Home() {
 	const context = useContext(ProductContext)
+
 	const {pro,Getproduct} = context;  
+
 	const Adminurl='https://localhost:44376/'
-	
+
+	let navigate = useNavigate();
+
 	useEffect(() => {
         Getproduct();
     },[]);
 
+	const handleNameClick = (ProductId) => {
+		console.log("Navigating to product ID:", ProductId);
+		navigate(`/check/${ProductId}`);
+	
+	}
+	
   return (
     <>
 	<div className="section">
@@ -54,7 +64,7 @@ export default function Home() {
 					</div>
 				</div>
 			</div>
-	</div>
+		</div>
 
 		{/* SECTION loop */}
 		 <div className="section">
@@ -81,6 +91,7 @@ export default function Home() {
 									{pro && Array.isArray(pro) ? (
 										pro.map((product) => (									
 											<div key={product.ProductId} className='col-md-4'>
+											
 											<div className="product">
 											<div className="product-img">
 												<img src={Adminurl+product.ImagePath} alt=""/>
@@ -90,10 +101,10 @@ export default function Home() {
 												</div>
 											</div>
 											<div className="product-body">
-												<h3 className="product-name"><Link to="/checkprocess">{product.Name}</Link></h3>
+												<h3 className="product-name" onClick={() => handleNameClick(product.ProductId)}>{product.Name}</h3>
 												<h4 className="product-price">${product.Price}<del className="product-old-price">$990.00</del></h4>
 												<div className="product-rating">
-													<i className="fa fa-star"></i>
+												<i className="fa fa-star"></i>
 												</div>
 												<div className="product-btns">
 													<button className="add-to-wishlist"><i className="fa fa-heart-o"></i><span className="tooltipp">add to wishlist</span></button>
@@ -193,5 +204,6 @@ export default function Home() {
 			</div>
 		</div>
 </>
-  )
-}
+)
+	}
+

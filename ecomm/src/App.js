@@ -6,30 +6,27 @@ import Footer from './Componets/Footer';
 import ProductState from './Context/Product/ProductState';
 import Register from './Componets/Register';
 import Login from './Componets/Login';
-import CheckVeriation from './Componets/CheckVeriation';
-
+import Checkpro from './Componets/Checkpro';
 
 function App() {
   return (
   <ProductState>
-      <Router>
-
+    <Router>
     <>
     <Navbar/>
-   <div className="container">
+   <div className="container-fluid">
    <Routes>
    <Route exect path='/home' element={<Home/>}/>
    <Route exect path='/Reg' element={<Register/>}/>
    <Route exect path='/login' element={<Login/>}/>
-  <Route exect path='/checkprocess' element={<CheckVeriation/>}/> 
-
+   <Route exect path="/check/:ProductId" element={<Checkpro/>}/>
    </Routes>
    </div>
    <Footer/>
-   </>
+   </> 
    </Router>
    </ProductState>
   );
 }
 
-export default App;
+  export default App;

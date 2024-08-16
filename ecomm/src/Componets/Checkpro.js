@@ -1,7 +1,21 @@
-import React from 'react'
+import React, { useEffect, version } from 'react'
+import ProductContext from '../Context/Product/ProductContext'
+import { useContext } from 'react'
+import { useParams } from 'react-router-dom'
 
-export default function CheckVeriation() {
-  return (
+export default function Checkpro() {
+	const context = useContext(ProductContext)
+	const {veriation,Veriation}=context
+	const{ProductId}=useParams()
+	console.log("paramid",ProductId)
+
+	const Adminurl='https://localhost:44376/'
+	useEffect(()=>{
+		Veriation(ProductId)
+		 },[]);
+		
+	return (
+		
 	<>
 		<div id="breadcrumb" className="section">
 			<div className="container">
@@ -18,50 +32,29 @@ export default function CheckVeriation() {
 				</div>
 			</div>
 		</div>
-
+		
 		<div className="section">
 			<div className="container">
 				<div className="row">
-					<div className="col-md-5 col-md-push-2">
+				{veriation.map((season) => (
+					<div className="col-md-5 col-md-push-2" key={season.veriationId}>
 						<div id="product-main-img">
 							<div className="product-preview">
-								<img src="./img/product01.png" alt=""/>
-							</div>
-
-							<div className="product-preview">
-								<img src="./img/product03.png" alt=""/>
-							</div>
-
-							<div className="product-preview">
-								<img src="./img/product06.png" alt=""/>
-							</div>
-
-							<div className="product-preview">
-								<img src="./img/product08.png" alt=""/>
+							<img src={Adminurl+season.image} alt=""/>
 							</div>
 						</div>
 					</div>
-					
-					<div className="col-md-2  col-md-pull-5">
+					))}		
+
+					{veriation.map((season) => (						
+					<div className="col-md-2  col-md-pull-5" key={season.veriationId}>
 						<div id="product-imgs">
 							<div className="product-preview">
-								<img src="./img/product01.png" alt=""/>
-							</div>
-
-							<div className="product-preview">
-								<img src="./img/product03.png" alt=""/>
-							</div>
-
-							<div className="product-preview">
-								<img src="./img/product06.png" alt=""/>
-							</div>
-
-							<div className="product-preview">
-								<img src="./img/product08.png" alt=""/>
+								<img src={Adminurl+season.image} alt=""/>
 							</div>
 						</div>
-					</div>
-					
+					</div>				
+				))}		
 					<div className="col-md-5">
 						<div className="product-details">
 							<h2 className="product-name">product name goes here</h2>
@@ -93,9 +86,9 @@ export default function CheckVeriation() {
 									<select className="input-select">
 										<option value="0">Red</option>
 									</select>
-								</label>
+								</label>					
 							</div>
-
+							
 							<div className="add-to-cart">
 								<div className="qty-label">
 									Qty
@@ -128,8 +121,7 @@ export default function CheckVeriation() {
 							</ul>
 
 						</div>
-					</div>
-					
+				
 					<div className="col-md-12">
 						<div id="product-tab">
 							<ul className="tab-nav">
@@ -137,7 +129,7 @@ export default function CheckVeriation() {
 								<li><a data-toggle="tab" href="#tab2">Details</a></li>
 								<li><a data-toggle="tab" href="#tab3">Reviews (3)</a></li>
 							</ul>
-					
+						
 							<div className="tab-content">
 								<div id="tab1" className="tab-pane fade in active">
 									<div className="row">
@@ -146,7 +138,7 @@ export default function CheckVeriation() {
 										</div>
 									</div>
 								</div>
-							
+								
 								<div id="tab2" className="tab-pane fade in">
 									<div className="row">
 										<div className="col-md-12">
@@ -154,7 +146,7 @@ export default function CheckVeriation() {
 										</div>
 									</div>
 								</div>
-							
+			
 								<div id="tab3" className="tab-pane fade in">
 									<div className="row">
 										<div className="col-md-3">
@@ -179,7 +171,7 @@ export default function CheckVeriation() {
 															<i className="fa fa-star"></i>
 														</div>
 														<div className="rating-progress">
-															<div style="width: 80%;"></div>
+															<div style={{"width":"80%"}}></div>
 														</div>
 														<span className="sum">3</span>
 													</li>
@@ -192,7 +184,7 @@ export default function CheckVeriation() {
 															<i className="fa fa-star-o"></i>
 														</div>
 														<div className="rating-progress">
-															<div style="width: 60%;"></div>
+															<div style={{"width":"60%"}}></div>
 														</div>
 														<span className="sum">2</span>
 													</li>
@@ -238,7 +230,7 @@ export default function CheckVeriation() {
 												</ul>
 											</div>
 										</div>
-								
+										
 										<div className="col-md-6">
 											<div id="reviews">
 												<ul className="reviews">
@@ -300,7 +292,7 @@ export default function CheckVeriation() {
 												</ul>
 											</div>
 										</div>
-								
+					
 										<div className="col-md-3">
 											<div id="review-form">
 												<form className="review-form">
@@ -310,11 +302,7 @@ export default function CheckVeriation() {
 													<div className="input-rating">
 														<span>Your Rating: </span>
 														<div className="stars">
-															<input id="star5" name="rating" value="5" type="radio"/><label for="star5"></label>
-															<input id="star4" name="rating" value="4" type="radio"/><label for="star4"></label>
-															<input id="star3" name="rating" value="3" type="radio"/><label for="star3"></label>
-															<input id="star2" name="rating" value="2" type="radio"/><label for="star2"></label>
-															<input id="star1" name="rating" value="1" type="radio"/><label for="star1"></label>
+														<input id="star5" name="rating" value="5" type="radio"/><label htmlFor="star5"></label>					
 														</div>
 													</div>
 													<button className="primary-btn">Submit</button>
@@ -329,128 +317,37 @@ export default function CheckVeriation() {
 				</div>
 			</div>
 		</div>
-
-		<div className="section">
+	</div>
+	<div id="newsletter" className="section">
 			<div className="container">
 				<div className="row">
-
 					<div className="col-md-12">
-						<div className="section-title text-center">
-							<h3 className="title">Related Products</h3>
+						<div className="newsletter">
+							<p>Sign Up for the <strong>NEWSLETTER</strong></p>
+							<form>
+								<input className="input" type="email" placeholder="Enter Your Email"/>
+								<button className="newsletter-btn"><i className="fa fa-envelope"></i> Subscribe</button>
+							</form>
+							<ul className="newsletter-follow">
+								<li>
+									<a href="#"><i className="fa fa-facebook"></i></a>
+								</li>
+								<li>
+									<a href="#"><i className="fa fa-twitter"></i></a>
+								</li>
+								<li>
+									<a href="#"><i className="fa fa-instagram"></i></a>
+								</li>
+								<li>
+									<a href="#"><i className="fa fa-pinterest"></i></a>
+								</li>
+							</ul>
 						</div>
 					</div>
-
-					<div className="col-md-3 col-xs-6">
-						<div className="product">
-							<div className="product-img">
-								<img src="./img/product01.png" alt=""/>
-								<div className="product-label">
-									<span className="sale">-30%</span>
-								</div>
-							</div>
-							<div className="product-body">
-								<p className="product-category">Category</p>
-								<h3 className="product-name"><a href="#">product name goes here</a></h3>
-								<h4 className="product-price">$980.00 <del className="product-old-price">$990.00</del></h4>
-								<div className="product-rating">
-								</div>
-								<div className="product-btns">
-									<button className="add-to-wishlist"><i className="fa fa-heart-o"></i><span className="tooltipp">add to wishlist</span></button>
-									<button className="add-to-compare"><i className="fa fa-exchange"></i><span className="tooltipp">add to compare</span></button>
-									<button className="quick-view"><i className="fa fa-eye"></i><span className="tooltipp">quick view</span></button>
-								</div>
-							</div>
-							<div className="add-to-cart">
-								<button className="add-to-cart-btn"><i className="fa fa-shopping-cart"></i> add to cart</button>
-							</div>
-						</div>
-					</div>
-			
-					<div className="col-md-3 col-xs-6">
-						<div className="product">
-							<div className="product-img">
-								<img src="./img/product02.png" alt=""/>
-								<div className="product-label">
-									<span className="new">NEW</span>
-								</div>
-							</div>
-							<div className="product-body">
-								<p className="product-category">Category</p>
-								<h3 className="product-name"><a href="#">product name goes here</a></h3>
-								<h4 className="product-price">$980.00 <del className="product-old-price">$990.00</del></h4>
-								<div className="product-rating">
-									<i className="fa fa-star"></i>
-									<i className="fa fa-star"></i>
-									<i className="fa fa-star"></i>
-									<i className="fa fa-star"></i>
-									<i className="fa fa-star"></i>
-								</div>
-								<div className="product-btns">
-									<button className="add-to-wishlist"><i className="fa fa-heart-o"></i><span className="tooltipp">add to wishlist</span></button>
-									<button className="add-to-compare"><i className="fa fa-exchange"></i><span className="tooltipp">add to compare</span></button>
-									<button className="quick-view"><i className="fa fa-eye"></i><span className="tooltipp">quick view</span></button>
-								</div>
-							</div>
-							<div className="add-to-cart">
-								<button className="add-to-cart-btn"><i className="fa fa-shopping-cart"></i> add to cart</button>
-							</div>
-						</div>
-					</div>
-					<div className="clearfix visible-sm visible-xs"></div>
-					<div className="col-md-3 col-xs-6">
-						<div className="product">
-							<div className="product-img">
-								<img src="./img/product03.png" alt=""/>
-							</div>
-							<div className="product-body">
-								<p className="product-category">Category</p>
-								<h3 className="product-name"><a href="#">product name goes here</a></h3>
-								<h4 className="product-price">$980.00 <del className="product-old-price">$990.00</del></h4>
-								<div className="product-rating">
-									<i className="fa fa-star"></i>
-									<i className="fa fa-star"></i>
-									<i className="fa fa-star"></i>
-									<i className="fa fa-star"></i>
-									<i className="fa fa-star-o"></i>
-								</div>
-								<div className="product-btns">
-									<button className="add-to-wishlist"><i className="fa fa-heart-o"></i><span className="tooltipp">add to wishlist</span></button>
-									<button className="add-to-compare"><i className="fa fa-exchange"></i><span className="tooltipp">add to compare</span></button>
-									<button className="quick-view"><i className="fa fa-eye"></i><span className="tooltipp">quick view</span></button>
-								</div>
-							</div>
-							<div className="add-to-cart">
-								<button className="add-to-cart-btn"><i className="fa fa-shopping-cart"></i> add to cart</button>
-							</div>
-						</div>
-					</div>
-				
-					<div className="col-md-3 col-xs-6">
-						<div className="product">
-							<div className="product-img">
-								<img src="./img/product04.png" alt=""/>
-							</div>
-							<div className="product-body">
-								<p className="product-category">Category</p>
-								<h3 className="product-name"><a href="#">product name goes here</a></h3>
-								<h4 className="product-price">$980.00 <del className="product-old-price">$990.00</del></h4>
-								<div className="product-rating">
-								</div>
-								<div className="product-btns">
-									<button className="add-to-wishlist"><i className="fa fa-heart-o"></i><span className="tooltipp">add to wishlist</span></button>
-									<button className="add-to-compare"><i className="fa fa-exchange"></i><span className="tooltipp">add to compare</span></button>
-									<button className="quick-view"><i className="fa fa-eye"></i><span className="tooltipp">quick view</span></button>
-								</div>
-							</div>
-							<div className="add-to-cart">
-								<button className="add-to-cart-btn"><i className="fa fa-shopping-cart"></i> add to cart</button>
-							</div>
-						</div>
-					</div>
-
 				</div>
 			</div>
-        </div>
-        </>
+	</div>
+  </>
   )
 }
+

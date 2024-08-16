@@ -106,6 +106,7 @@ export default function Navbar() {
 				</div>
 			</div>
 		</header>
+		
 		<nav id="navigation">
 			<div className="container">
 				<div id="responsive-nav">
@@ -113,8 +114,7 @@ export default function Navbar() {
 						<li className="active"><Link to="/home">Home</Link></li>
 						<li><Link to="/Reg">Signin</Link></li>
 						<li><Link to="/login">Login</Link></li>
-						<li><Link to="/checkprocess">CheckVeriation</Link></li>
-						<li><a to="#">Smartphones</a></li>
+						<li><Link to="/check">Smartphones</Link></li>
 						<li><a to="#">Cameras</a></li>
 						<li><a to="#">Accessories</a></li>
 					</ul>
